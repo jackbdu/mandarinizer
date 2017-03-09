@@ -17,7 +17,7 @@ image_file_name="original_image.jpg"
 output_file_name="mandarinized_"+image_file_name+".txt"
 
 # OPTIONAL: define the desired image width (in pixel) here
-image_width = 64
+image_width = 128
 
 # open the file to write
 print "loading the text file..."
@@ -38,6 +38,8 @@ height, width = img.shape
 
 # loop through each row of pixels
 print "converting..."
+
+contentToWrite = ""
 for i in range(height):
 
 	# loop through each pixel in the i-th row
@@ -45,25 +47,26 @@ for i in range(height):
 
 		# write corresponding chinese characters based on the color of the pixel
 		if img[i,j] < 32:
-			file.write("龘 ")
+			contentToWrite += "龘 "
 		elif img[i,j] < 64:
-			file.write("驫 ")
+			contentToWrite += "驫 "
 		elif img[i,j] < 96:
-			file.write("羴 ")
+			contentToWrite += "羴 "
 		elif img[i,j] < 128:
-			file.write("淼 ")
+			contentToWrite += "淼 "
 		elif img[i,j] < 160:
-			file.write("壵 ")
+			contentToWrite += "壵 "
 		elif img[i,j] < 192:
-			file.write("从 ")
+			contentToWrite += "从 "
 		elif img[i,j] < 224:
-			file.write("人 ")
+			contentToWrite += "人 "
 		else:
-			file.write("一 ")
+			contentToWrite += "一 "
 
 	# write a new line
-	file.write("\n")
+	contentToWrite += "\n"
 
+file.write(contentToWrite)
 # close file
 file.close()
 print "done!"
