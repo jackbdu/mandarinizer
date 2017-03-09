@@ -10,14 +10,14 @@ __credits__ = ["Richard Lewei Huang", "Shirley Huang"]
 __license__ = "MIT"
 __email__ = "jackbdu@nyu.edu"
 
-# define the output file name here
-output_file_name="mandarinized_image.txt"
+# REQUIRED: define the original image file here
+image_file_name="original_image.jpg"
 
-# define the original image file here
-image_file_name="original_image.png"
+# OPTIONAL: define the output file name here
+output_file_name="mandarinized_"+image_file_name+".txt"
 
-# define the desired image width (in pixel) here
-image_width = 32
+# OPTIONAL: define the desired image width (in pixel) here
+image_width = 64
 
 # open the file to write
 print "loading the text file..."
