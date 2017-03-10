@@ -37,7 +37,7 @@ def load_frames(filename):
         filetype, frameWidthStr, frameHeightStr, framerateStr = line.split(',')
     except ValueError:
         print 'error reading meta data: ' + filename
-        sys.exit
+        sys.exit()
 
     if (filetype != 'manvid'):
         print 'file type not supported: ' + filename
@@ -57,9 +57,9 @@ def load_frames(filename):
     # close the file
     manvidfile.close()
 
-    return frames, int(frameWidthStr), int(frameHeightStr)
+    return frames, int(frameWidthStr), int(frameHeightStr), int(framerateStr)
 
-framesBuffer, frameWidth, frameHeight = load_frames(args.filename)
+framesBuffer, frameWidth, frameHeight, framerate = load_frames(args.filename)
 # get the length (number) of frames
 framesLength = len(framesBuffer)
 
@@ -75,7 +75,8 @@ try:
             # progress bar
             print frameWidth*i/framesLength*'田'+(frameWidth-frameWidth*i/framesLength)*'囗'
             # time for one frame
-            time.sleep(1/int(framerateStr))
+            time.sleep(1.0/framerate)
+            print framerate
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
