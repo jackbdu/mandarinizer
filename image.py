@@ -24,6 +24,7 @@ image_width = 32
 char_list = ["龘","驫","羴","掱","𣝯","淼","品","壵","尛","太","大","木","乂","人","丿","丶"] # 16-bit char list
 #char_list = ["龘","驫","羴","淼","壵","从","人","一"] # 8-bit char list
 #char_list = ["龘","淼","从","人"] # 4-bit char list
+#char_list = ["W","N","Z","?","!",";","."," "] # 8-bit non-chinese char list
 
 # OPTIONAL: whehter or not to reverse the image
 image_reverse = False
