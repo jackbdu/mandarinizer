@@ -23,7 +23,7 @@ parser.add_argument('-w', "--width", type=int, default=64, help="specify the wid
 parser.add_argument('-fps', "--framerate", type=int, default=12, help="specify the frames per second")
 parser.add_argument('-v', "--video", help="path to the video file")
 parser.add_argument('-i', "--image", help="path to the image file")
-parser.add_argument('-o', "--out", default="out.man", help="path to the ouput file")
+parser.add_argument('-o', "--out", default="out", help="path to the ouput file")
 args = parser.parse_args()
 
 # comment out the list you like or even define your own character list
@@ -35,7 +35,7 @@ char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","
 if args.image:
     # open the file to write
     print "opening the text file..."
-    file = open(args.out, 'w')
+    file = open(args.out+'.outimg', 'w')
 
     # read image file as grayscale
     print "loading the image file..."
@@ -96,7 +96,7 @@ cap = cv2.VideoCapture(videoSource)
 
 try: 
     # open the file to write
-    file = open(args.out, "w")
+    file = open(args.out+".manvid", "w")
     # write file type in the first line of output file
     file.write("manvid,")
 
