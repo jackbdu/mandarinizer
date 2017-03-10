@@ -30,11 +30,17 @@ def load_frames(filename):
         print 'no such file or directory: ' + filename
         sys.exit()
 
-    # read first line in file
-    line = manvidfile.readline()
+    try:
+        # read first line in file
+        line = manvidfile.readline()
+        # get meta data from the file (first line in the file, seperated by ','
+        filetype, frameWidthStr, frameHeightStr = line.split(',')
+    except ValueError:
+        print 'error reading meta data: ' + filename
+        sys.exit
 
-    # get meta data from the file (first line in the file, seperated by ','
-    filetype, frameWidthStr, frameHeightStr = line.split(',')
+    if (filetype != 'manvid'):
+        print 'file type not supported: ' + filename
 
     # while file not finished
     while line != '':
@@ -53,9 +59,6 @@ def load_frames(filename):
 
     return frames, int(frameWidthStr), int(frameHeightStr)
 
-# clear the terminal window
-print(chr(27) + '[2J')
-print 'loading...'
 framesBuffer, frameWidth, frameHeight = load_frames(args.filename)
 # get the length (number) of frames
 framesLength = len(framesBuffer)
