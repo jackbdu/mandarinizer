@@ -11,13 +11,16 @@ __license__ = "MIT"
 __email__ = "jackbdu@nyu.edu"
 
 # REQUIRED: define the original image file here
-image_file_name="original_image.jpg"
+image_file_name="sample_image.jpg"
 
 # OPTIONAL: define the output file name here
 output_file_name="mandarinized_"+image_file_name+".txt"
 
 # OPTIONAL: define the desired image width (in pixel) here
-image_width = 128
+image_width = 64
+
+# ADVANCED: define your character list
+char_list = ["龘","驫","羴","淼","壵","从","人","一"]
 
 # open the file to write
 print "loading the text file..."
@@ -46,26 +49,16 @@ for i in range(height):
 	for j in range(width):
 
 		# write corresponding chinese characters based on the color of the pixel
-		if img[i,j] < 32:
-			contentToWrite += "龘 "
-		elif img[i,j] < 64:
-			contentToWrite += "驫 "
-		elif img[i,j] < 96:
-			contentToWrite += "羴 "
-		elif img[i,j] < 128:
-			contentToWrite += "淼 "
-		elif img[i,j] < 160:
-			contentToWrite += "壵 "
-		elif img[i,j] < 192:
-			contentToWrite += "从 "
-		elif img[i,j] < 224:
-			contentToWrite += "人 "
-		else:
-			contentToWrite += "一 "
+                char_length = len(char_list)
+                for k in range(char_length):
+                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
+                        contentToWrite += char_list[k]
+                        break
 
 	# write a new line
 	contentToWrite += "\n"
 
+print contentToWrite
 file.write(contentToWrite)
 # close file
 file.close()
