@@ -34,6 +34,7 @@ A Python program that converts image files, video files or live webcam stream to
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
 ```
+Above is a sample output of Mandarinizer [logo](./logo.png)
 
 ## Usage
 ### mandarinizer.py
