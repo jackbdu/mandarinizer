@@ -14,7 +14,8 @@ __email__ = "jackbdu@nyu.edu"
 image_file_name="sample_image.jpg"
 
 # OPTIONAL: define the output file name here
-output_file_name="mandarinized_"+image_file_name+".txt"
+output_file_name="mandarinized_"+image_file_name.split('.')[0]+".txt"
+print image_file_name.split('.')
 
 # OPTIONAL: define the desired resolution by image width (in pixel) here
 image_width = 32
@@ -28,7 +29,7 @@ char_list = ["龘","驫","羴","掱","𣝯","淼","品","壵","尛","太","大",
 image_reverse = False
 
 # OPTIONAL: whether or not to add a space between characters
-add_space = False
+add_space = True
 
 # open the file to write
 print "loading the text file..."
