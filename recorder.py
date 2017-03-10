@@ -113,8 +113,10 @@ try:
             print frameToPrint
         file.write(frameToPrint)
 
-        # define the period of time each frame's gonna last
-        time.sleep(1.0/args.framerate)
+        # when preview on or webcam mode, that is, no delay if converting video with preview off
+        if args.preveiew or args.video:
+            # define the period of time each frame's gonna last
+            time.sleep(1.0/args.framerate)
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
