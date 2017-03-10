@@ -3,6 +3,7 @@ A Python program that converts image files, video files or live webcam stream to
 
 ## Usage
 ### mandarinizer.py
+```
 usage: mandarinizer.py [-h] [-r] [-p] [-f] [-s] [-w WIDTH] [-fps FRAMERATE]
                        [-v VIDEO] [-i IMAGE] [-o OUT]
 
@@ -21,8 +22,10 @@ optional arguments:
   -i IMAGE, --image IMAGE
                         path to the image file
   -o OUT, --out OUT     path to the ouput file
+```
 
 ### player.py
+```
 usage: player.py [-h] [-fps FRAMERATE] filename
 
 positional arguments:
@@ -32,6 +35,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -fps FRAMERATE, --framerate FRAMERATE
                         specify the frames per second
+```
 
 ## License
 Image Mandarinizer is under the [MIT](./LICENSE).
