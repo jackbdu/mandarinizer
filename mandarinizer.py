@@ -35,7 +35,7 @@ char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","
 if args.image:
     # open the file to write
     print "opening the manimg file..."
-    file = open(args.out+'.outimg', 'w')
+    file = open(args.out+'.manimg', 'w')
 
     # read image file as grayscale
     print "loading the image file..."
