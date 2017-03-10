@@ -39,17 +39,20 @@ output_file_name = "output.manvid"
 try: 
     # open the file to write
     file = open(output_file_name, "w")
+    # write file type in the first line of output file
     file.write("manvid,")
 
     # read frame from web cam
     ret, frame = cap.read()
     # convert frame to grayscale image
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    img = cv2.equalizeHist(img)
     # get the height and width of the image
     height, width = img.shape
     # calculate the image height based on the image width
     image_height = height*image_width/width
 
+    # write meta data in the first line of output file
     file.write(str(image_width)+","+str(image_height)+"\n")
 
     while True:
@@ -100,7 +103,7 @@ try:
         file.write(frameToPrint)
 
         # define the period of time each frame's gonna last
-        time.sleep(0.2)
+        #time.sleep(0.1)
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
