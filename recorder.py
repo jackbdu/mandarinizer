@@ -2,9 +2,10 @@
 # encoding=utf-8
 
 # you need to install opencv before running the script import cv2
+import sys      # exit
+import time     # sleep
+import argparse # argparse
 import cv2
-import time # sleep
-import sys  # exit
 
 __author__ = "Jack B. Du"
 __copyright__ = "Copyright (c) 2017, Jack B. Du"
@@ -12,11 +13,25 @@ __credits__ = ["Richard Lewei Huang", "Shirley Huang"]
 __license__ = "MIT"
 __email__ = "jackbdu@nyu.edu"
 
-# initialize video capture from builtin webcam
-cap = cv2.VideoCapture(0)
+# parsing arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('-r', "--reverse", action='store_false', help="reverse the color value of the frame")
+parser.add_argument('-f', "--flip", action='store_false', help="flip the video vertically")
+parser.add_argument('-s', "--space", action='store_true', help="add a space between every two characters")
+parser.add_argument('-w', "--width", type=int, default=64, help="specify the width of the output video")
+parser.add_argument('-fps', "--framerate", type=int, default=12, help="specify the frames per second")
+parser.add_argument('-v', "--video", help="path to the video file")
+parser.add_argument('-o', "--out", default="out.manvid", help="path to the ouput file")
+args = parser.parse_args()
 
-# OPTIONAL: define the desired image width (in pixel) here
-image_width = 64
+# turn on webcam when video file is not specified
+if args.video:
+    videoSource = args.video
+else:
+    videoSource = 0
+
+# initialize video capture from builtin webcam
+cap = cv2.VideoCapture(videoSource)
 
 # OPTIONAL: comment out the list you like or even define your own character list
 char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"] # 16-bit char list
@@ -24,21 +39,9 @@ char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","
 #char_list = ["龘","淼","从","人"] # 4-bit char list
 #char_list = ["W","N","Z","?","!",";","."," "] # 8-bit non-chinese char list
 
-# OPTIONAL: whehter or not to reverse the image
-image_reverse = False
-
-# OPTIONAL: whether or not to add a space between characters
-add_space = False
-
-# OPTIONAL: whether or not to flip the image vertically
-image_flip = True
-
-# OPTIONAL: define the output file name here
-output_file_name = "output.manvid"
-
 try: 
     # open the file to write
-    file = open(output_file_name, "w")
+    file = open(args.out, "w")
     # write file type in the first line of output file
     file.write("manvid,")
 
@@ -50,10 +53,10 @@ try:
     # get the height and width of the image
     height, width = img.shape
     # calculate the image height based on the image width
-    image_height = height*image_width/width
+    image_height = height*args.width/width
 
     # write meta data in the first line of output file
-    file.write(str(image_width)+","+str(image_height)+"\n")
+    file.write(str(args.width)+","+str(image_height)+"\n")
 
     while True:
         # read frame from web cam
@@ -63,10 +66,10 @@ try:
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # resize the image
-        img = cv2.resize(img,(image_width, image_height), interpolation = cv2.INTER_CUBIC)
+        img = cv2.resize(img,(args.width, image_height), interpolation = cv2.INTER_CUBIC)
 
         # flip the image vertically
-        if (image_flip):
+        if (args.flip):
             img = cv2.flip(img, 1)
 
         # get the new height and width of the image
@@ -85,11 +88,11 @@ try:
                 char_length = len(char_list)
                 for k in range(char_length):
                     if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                        if image_reverse:
+                        if args.reverse:
                             frameToPrint += char_list[char_length-k-1]
                         else:
                             frameToPrint += char_list[k]
-                        if add_space:
+                        if args.space:
                             frameToPrint += ' '
                         break
 
@@ -103,7 +106,7 @@ try:
         file.write(frameToPrint)
 
         # define the period of time each frame's gonna last
-        #time.sleep(0.1)
+        time.sleep(1.0/args.framerate)
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
