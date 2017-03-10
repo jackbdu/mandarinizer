@@ -34,7 +34,7 @@ def load_frames(filename):
         # read first line in file
         line = manvidfile.readline()
         # get meta data from the file (first line in the file, seperated by ','
-        filetype, frameWidthStr, frameHeightStr = line.split(',')
+        filetype, frameWidthStr, frameHeightStr, framerateStr = line.split(',')
     except ValueError:
         print 'error reading meta data: ' + filename
         sys.exit
@@ -75,7 +75,7 @@ try:
             # progress bar
             print frameWidth*i/framesLength*'田'+(frameWidth-frameWidth*i/framesLength)*'囗'
             # time for one frame
-            time.sleep(0.2)
+            time.sleep(1/int(framerateStr))
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
