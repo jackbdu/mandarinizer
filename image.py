@@ -55,23 +55,23 @@ print "converting..."
 contentToWrite = ""
 for i in range(height):
 
-	# loop through each pixel in the i-th row
-	for j in range(width):
+    # loop through each pixel in the i-th row
+    for j in range(width):
 
-		# write corresponding chinese characters based on the color of the pixel
-                char_length = len(char_list)
-                for k in range(char_length):
-                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                        if image_reverse:
-                            contentToWrite += char_list[char_length-k-1]
-                        else:
-                            contentToWrite += char_list[k]
-                        if add_space:
-                            contentToWrite += ' '
-                        break
+        # write corresponding chinese characters based on the color of the pixel
+        char_length = len(char_list)
+        for k in range(char_length):
+            if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
+                if image_reverse:
+                    contentToWrite += char_list[char_length-k-1]
+                else:
+                    contentToWrite += char_list[k]
+                if add_space:
+                    contentToWrite += ' '
+                break
 
-	# write a new line
-	contentToWrite += "\n"
+    # write a new line
+    contentToWrite += "\n"
 
 print contentToWrite
 file.write(contentToWrite)
