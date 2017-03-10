@@ -34,7 +34,7 @@ char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","
 
 if args.image:
     # open the file to write
-    print "opening the text file..."
+    print "opening the manimg file..."
     file = open(args.out+'.outimg', 'w')
 
     # read image file as grayscale
@@ -51,7 +51,7 @@ if args.image:
     height, width = img.shape
 
     # loop through each row of pixels
-    print "converting..."
+    print "mandarinizing..."
 
     contentToWrite = ""
     for i in range(height):
@@ -82,7 +82,7 @@ if args.image:
     # close file
     print "closing file..."
     file.close()
-    print "done!"
+    print "mandarinized!"
     sys.exit()
 
 # turn on webcam when video file is not specified
@@ -102,6 +102,13 @@ try:
 
     # read frame from web cam
     ret, frame = cap.read()
+    if not ret:
+    # release the video capture
+        print "video capture failed!"
+        file.close()
+        cap.release()
+        sys.exit()
+
     # convert frame to grayscale image
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     img = cv2.equalizeHist(img)
@@ -115,12 +122,17 @@ try:
     file.write(str(image_height)+",")
     file.write(str(args.framerate)+"\n")
 
-    if not args.preview:
-        print "recording..."
+    print "mandarinizing..."
 
     while True:
         # read frame from web cam
         ret, frame = cap.read()
+        if not ret:
+            # release the video capture
+            print "mandarinized!"
+            file.close()
+            cap.release()
+            sys.exit()
 
         # convert frame to grayscale image
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
