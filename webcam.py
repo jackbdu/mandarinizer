@@ -50,7 +50,7 @@ try:
     # calculate the image height based on the image width
     image_height = height*image_width/width
 
-    file.write(str(image_height)+"\n")
+    file.write(str(image_width)+","+str(image_height)+"\n")
 
     while True:
         # read frame from web cam
