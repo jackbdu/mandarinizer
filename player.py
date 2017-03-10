@@ -81,7 +81,6 @@ try:
             print frameWidth*i/framesLength*'田'+(frameWidth-frameWidth*i/framesLength)*'囗'
             # time for one frame
             time.sleep(1.0/framerate)
-            print framerate
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
