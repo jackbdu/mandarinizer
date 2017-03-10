@@ -16,6 +16,7 @@ __email__ = "jackbdu@nyu.edu"
 # parsing arguments
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', "--reverse", action='store_false', help="reverse the color value of the frame")
+parser.add_argument('-p', "--preview", action='store_false', help="toggle preview")
 parser.add_argument('-f', "--flip", action='store_false', help="flip the video vertically")
 parser.add_argument('-s', "--space", action='store_true', help="add a space between every two characters")
 parser.add_argument('-w', "--width", type=int, default=64, help="specify the width of the output video")
@@ -60,6 +61,9 @@ try:
     file.write(str(image_height)+",")
     file.write(str(args.framerate)+"\n")
 
+    if not args.preview:
+        print "recording..."
+
     while True:
         # read frame from web cam
         ret, frame = cap.read()
@@ -100,11 +104,13 @@ try:
 
             # write a new line
             frameToPrint += "\n"
-        # clear the terminal window
-        print(chr(27) + "[2J")
 
-        # print out the frame
-        print frameToPrint
+        if args.preview:
+            # clear the terminal window
+            print(chr(27) + "[2J")
+
+            # print out the frame
+            print frameToPrint
         file.write(frameToPrint)
 
         # define the period of time each frame's gonna last
