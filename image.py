@@ -16,11 +16,19 @@ image_file_name="sample_image.jpg"
 # OPTIONAL: define the output file name here
 output_file_name="mandarinized_"+image_file_name+".txt"
 
-# OPTIONAL: define the desired image width (in pixel) here
-image_width = 64
+# OPTIONAL: define the desired resolution by image width (in pixel) here
+image_width = 32
 
-# ADVANCED: define your character list
-char_list = ["龘","驫","羴","淼","壵","从","人","一"]
+# OPTIONAL: comment out the list you like or even define your own character list
+char_list = ["龘","麤","驫","羴","掱","蟲","𣝯","淼","品","壵","尛","太","大","人","丿","丶"] # 16-bit char list
+#char_list = ["龘","驫","羴","淼","壵","从","人","一"] # 8-bit char list
+#char_list = ["龘","淼","从","人"] # 4-bit char list
+
+# OPTIONAL: whehter or not to reverse the image
+image_reverse = False
+
+# OPTIONAL: whether or not to add a space between characters
+add_space = False
 
 # open the file to write
 print "loading the text file..."
@@ -52,7 +60,12 @@ for i in range(height):
                 char_length = len(char_list)
                 for k in range(char_length):
                     if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                        contentToWrite += char_list[k]
+                        if image_reverse:
+                            contentToWrite += char_list[char_length-k-1]
+                        else:
+                            contentToWrite += char_list[k]
+                        if add_space:
+                            contentToWrite += ' '
                         break
 
 	# write a new line
