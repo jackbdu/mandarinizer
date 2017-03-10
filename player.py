@@ -12,7 +12,8 @@ __email__ = 'jackbdu@nyu.edu'
 
 # parsing arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('filename', metavar='filename', type=str)
+parser.add_argument('filename', metavar='filename', type=str, help="path to file")
+parser.add_argument('-fps', "--framerate", type=int, help="specify the frames per second")
 args = parser.parse_args()
 
 # buffer that stores all the frames of texts
@@ -60,6 +61,10 @@ def load_frames(filename):
     return frames, int(frameWidthStr), int(frameHeightStr), int(framerateStr)
 
 framesBuffer, frameWidth, frameHeight, framerate = load_frames(args.filename)
+
+# change framerate if specified
+if args.framerate != None:
+    framerate = args.framerate
 # get the length (number) of frames
 framesLength = len(framesBuffer)
 
