@@ -16,7 +16,18 @@ __email__ = "jackbdu@nyu.edu"
 cap = cv2.VideoCapture(0)
 
 # OPTIONAL: define the desired image width (in pixel) here
-image_width = 100
+image_width = 64
+
+# OPTIONAL: comment out the list you like or even define your own character list
+char_list = ["龘","麤","驫","羴","掱","蟲","𣝯","淼","品","壵","尛","太","大","人","丿","丶"] # 16-bit char list
+#char_list = ["龘","驫","羴","淼","壵","从","人","一"] # 8-bit char list
+#char_list = ["龘","淼","从","人"] # 4-bit char list
+
+# OPTIONAL: whehter or not to reverse the image
+image_reverse = False
+
+# OPTIONAL: whether or not to add a space between characters
+add_space = False
 
 try: 
 	while True:
@@ -45,22 +56,16 @@ try:
 			for j in range(width):
 
 				# write corresponding chinese characters based on the color of the pixel
-				if img[i,j] < 32:
-					frameToPrint += "龘"
-				elif img[i,j] < 64:
-					frameToPrint += "驫"
-				elif img[i,j] < 96:
-					frameToPrint += "羴"
-				elif img[i,j] < 128:
-					frameToPrint += "淼"
-				elif img[i,j] < 160:
-					frameToPrint += "壵"
-				elif img[i,j] < 192:
-					frameToPrint += "从"
-				elif img[i,j] < 224:
-					frameToPrint += "人"
-				else:
-					frameToPrint += "一"
+                                char_length = len(char_list)
+                                for k in range(char_length):
+                                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
+                                        if image_reverse:
+                                            frameToPrint += char_list[char_length-k-1]
+                                        else:
+                                            frameToPrint += char_list[k]
+                                        if add_space:
+                                            frameToPrint += ' '
+                                        break
 
 			# write a new line
 			frameToPrint += "\n"
