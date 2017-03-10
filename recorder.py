@@ -56,7 +56,9 @@ try:
     image_height = height*args.width/width
 
     # write meta data in the first line of output file
-    file.write(str(args.width)+","+str(image_height)+"\n")
+    file.write(str(args.width)+",")
+    file.write(str(image_height)+",")
+    file.write(str(args.framerate)+"\n")
 
     while True:
         # read frame from web cam
