@@ -3,8 +3,8 @@
 
 # you need to install opencv before running the script import cv2
 import cv2
-import time	# sleep
-import sys	# exit
+import time # sleep
+import sys  # exit
 
 __author__ = "Jack B. Du"
 __copyright__ = "Copyright (c) 2017, Jack B. Du"
@@ -33,61 +33,78 @@ add_space = False
 # OPTIONAL: whether or not to flip the image vertically
 image_flip = True
 
+# OPTIONAL: define the output file name here
+output_file_name = "output.manvid"
+
 try: 
-	while True:
-		# read frame from web cam
-		ret, frame = cap.read()
+    # open the file to write
+    file = open(output_file_name, "w")
+    file.write("manvid,")
 
-		# convert frame to grayscale image
-		img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # read frame from web cam
+    ret, frame = cap.read()
+    # convert frame to grayscale image
+    img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # get the height and width of the image
+    height, width = img.shape
+    # calculate the image height based on the image width
+    image_height = height*image_width/width
 
-		# get the height and width of the image
-		height, width = img.shape
+    file.write(str(image_height)+"\n")
 
-		# resize the image
-		img = cv2.resize(img,(image_width, height*image_width/width), interpolation = cv2.INTER_CUBIC)
+    while True:
+        # read frame from web cam
+        ret, frame = cap.read()
 
-                # flip the image vertically
-                if (image_flip):
-                    img = cv2.flip(img, 1)
+        # convert frame to grayscale image
+        img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-		# get the new height and width of the image
-		height, width = img.shape
+        # resize the image
+        img = cv2.resize(img,(image_width, image_height), interpolation = cv2.INTER_CUBIC)
 
-		# initialize an empty string to store the entire frame of text
-		frameToPrint = ""
+        # flip the image vertically
+        if (image_flip):
+            img = cv2.flip(img, 1)
 
-		# loop through each row of pixels of the image
-		for i in range(height):
+        # get the new height and width of the image
+        height, width = img.shape
 
-			# loop through each pixel in the i-th row of the image
-			for j in range(width):
+        # initialize an empty string to store the entire frame of text
+        frameToPrint = ""
 
-				# write corresponding chinese characters based on the color of the pixel
-                                char_length = len(char_list)
-                                for k in range(char_length):
-                                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                                        if image_reverse:
-                                            frameToPrint += char_list[char_length-k-1]
-                                        else:
-                                            frameToPrint += char_list[k]
-                                        if add_space:
-                                            frameToPrint += ' '
-                                        break
+        # loop through each row of pixels of the image
+        for i in range(height):
 
-			# write a new line
-			frameToPrint += "\n"
-		# clear the terminal window
-		print(chr(27) + "[2J")
+            # loop through each pixel in the i-th row of the image
+            for j in range(width):
 
-		# print out the frame
-		print frameToPrint
+                # write corresponding chinese characters based on the color of the pixel
+                char_length = len(char_list)
+                for k in range(char_length):
+                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
+                        if image_reverse:
+                            frameToPrint += char_list[char_length-k-1]
+                        else:
+                            frameToPrint += char_list[k]
+                        if add_space:
+                            frameToPrint += ' '
+                        break
 
-		# define the period of time each frame's gonna last
-		time.sleep(0.2)
+            # write a new line
+            frameToPrint += "\n"
+        # clear the terminal window
+        print(chr(27) + "[2J")
+
+        # print out the frame
+        print frameToPrint
+        file.write(frameToPrint)
+
+        # define the period of time each frame's gonna last
+        time.sleep(0.2)
 
 # handle KeyboardInterrupt, typically Ctrl + C
 except KeyboardInterrupt:
-	# release the video capture
-	cap.release()
-	sys.exit()
+    # release the video capture
+    file.close()
+    cap.release()
+    sys.exit()
