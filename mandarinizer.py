@@ -17,7 +17,7 @@ __email__ = "jackbdu@nyu.edu"
 parser = argparse.ArgumentParser(description="Mandarinize an image file, a video file or a webcam stream.")
 parser.add_argument('-r', "--reverse", action='store_true', help="toggle the reverse of the frame")
 parser.add_argument('-p', "--preview", action='store_false', help="toggle preview")
-parser.add_argument('-f', "--flip", action='store_true', help="flip the frame vertically")
+parser.add_argument('-f', "--flip", action='store_true', help="toggle the vertical flip of the frame")
 parser.add_argument('-s', "--space", action='store_true', help="add a space between every two characters")
 parser.add_argument('-w', "--width", type=int, default=64, help="specify the width of the output")
 parser.add_argument('-fps', "--framerate", type=int, default=12, help="specify the frames per second")
