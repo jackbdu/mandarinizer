@@ -46,7 +46,7 @@ Mandarinize an image file, a video file or a webcam stream.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -ivt, --invert        invert the color of the frame
+  -inv, --invert        invert the color of the frame
   -p, --preview         toggle preview
   -f, --flip            toggle the vertical flip of the frame
   -s, --space           add a space between every two characters
