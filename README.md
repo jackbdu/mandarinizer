@@ -1,5 +1,7 @@
 # Mandarinizer
+
 A Python program that converts image files, video files or live webcam stream to ASCII-art-inspired Chinese character art.
+
 ```
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
@@ -34,10 +36,23 @@ A Python program that converts image files, video files or live webcam stream to
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
 ```
+
 Above is a sample output of Mandarinizer [logo](./logo.png)
 
+## Prerequisites
+
+If you only want to use player.py, you can skip this part.
+
+However, in order to use mandarinizer.py, you need to have opencv-python installed. To install the package:
+
+```
+pip install opencv-python
+```
+
 ## Usage
+
 ### mandarinizer.py
+
 ```
 usage: mandarinizer.py [-h] [--version] [-inv] [-p] [-f] [-s] [-w WIDTH]
                        [-fps FRAMERATE] [-d {2,4,8,16}]
@@ -69,6 +84,7 @@ optional arguments:
 ```
 
 ### player.py
+
 ```
 usage: player.py [-h] [-fps FRAMERATE] filename
 
@@ -82,4 +98,5 @@ optional arguments:
 ```
 
 ## License
-Image Mandarinizer is under the [MIT](./LICENSE).
+
+Image Mandarinizer is under the [MIT License](./LICENSE).
