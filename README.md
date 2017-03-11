@@ -99,4 +99,4 @@ optional arguments:
 
 ## License
 
-Image Mandarinizer is under the [MIT License](./LICENSE).
+Mandarinizer is licensed under the [MIT License](./LICENSE).
