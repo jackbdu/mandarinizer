@@ -69,7 +69,7 @@ if args.image:
             char_length = len(char_list)
             for k in range(char_length):
                 if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                    if args.reverse:
+                    if args.invert:
                         contentToWrite += char_list[char_length-k-1]
                     else:
                         contentToWrite += char_list[k]
@@ -167,7 +167,7 @@ try:
                 char_length = len(char_list)
                 for k in range(char_length):
                     if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                        if args.reverse:
+                        if args.invert:
                             frameToPrint += char_list[char_length-k-1]
                         else:
                             frameToPrint += char_list[k]
