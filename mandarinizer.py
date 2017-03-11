@@ -36,7 +36,6 @@ elif args.depth == 8:
     char_list = ["龘","驫","羴","淼","壵","从","人","一"] # 8-bit char list
 else:
     char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"] # 16-bit char list
-#char_list = ["W","N","Z","?","!",";","."," "] # 8-bit non-chinese char list
 
 if args.image:
     # open the file to write
@@ -166,7 +165,7 @@ try:
                 # write corresponding chinese characters based on the color of the pixel
                 char_length = len(char_list)
                 for k in range(char_length):
-                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
+                    if img[i, j] < (k+1)*256/char_length and img[i, j] >= k*256/char_length:
                         if args.invert:
                             frameToPrint += char_list[char_length-k-1]
                         else:
