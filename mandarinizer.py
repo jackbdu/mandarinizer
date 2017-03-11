@@ -15,27 +15,31 @@ __email__ = "jackbdu@nyu.edu"
 
 # parsing arguments
 parser = argparse.ArgumentParser(description="Mandarinize an image file, a video file or a webcam stream.")
+parser.add_argument('--version', action='version', version='%(prog)s 0.1') 
 parser.add_argument('-inv', "--invert", action='store_true', help="invert the color of the frame")
 parser.add_argument('-p', "--preview", action='store_false', help="toggle preview")
 parser.add_argument('-f', "--flip", action='store_true', help="toggle the vertical flip of the frame")
-parser.add_argument('-s', "--space", action='store_true', help="add a space between every two characters")
+parser.add_argument('-s', "--space", action='count', help="add a space between every two characters")
 parser.add_argument('-w', "--width", type=int, default=64, help="specify the width of the output")
 parser.add_argument('-fps', "--framerate", type=int, default=12, help="specify the frames per second")
 parser.add_argument('-d', "--depth", type=int, default=16, choices=[2,4,8,16], help="specify the color depth")
+parser.add_argument('-c', "--character", nargs='+', help="specify a list of characters by the order of indensity")
 parser.add_argument('-v', "--video", help="path to the video file")
 parser.add_argument('-i', "--image", help="path to the image file")
 parser.add_argument('-o', "--out", default="out", help="path to the ouput file")
 args = parser.parse_args()
 
-# comment out the list you like or even define your own character list
-if args.depth == 2:
-    char_list = ["龘","一"] # 2-bit char list
-elif args.depth == 4:
-    char_list = ["龘","淼","从","人"] # 4-bit char list
-elif args.depth == 8:
-    char_list = ["龘","驫","羴","淼","壵","从","人","一"] # 8-bit char list
+if args.character:
+    char_list = args.character
 else:
-    char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"] # 16-bit char list
+    if args.depth == 2:
+        char_list = ["龘","一"] # 2-bit char list
+    elif args.depth == 4:
+        char_list = ["龘","淼","从","人"] # 4-bit char list
+    elif args.depth == 8:
+        char_list = ["龘","驫","羴","淼","壵","从","人","一"] # 8-bit char list
+    else:
+        char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"] # 16-bit char list
 
 if args.image:
     # open the file to write
@@ -73,7 +77,8 @@ if args.image:
                     else:
                         contentToWrite += char_list[k]
                     if args.space:
-                        contentToWrite += ' '
+                        for l in range(args.space):
+                            contentToWrite += ' '
                     break
 
         # write a new line
@@ -171,7 +176,8 @@ try:
                         else:
                             frameToPrint += char_list[k]
                         if args.space:
-                            frameToPrint += ' '
+                            for i in range(args.space):
+                                frameToPrint += ' '
                         break
 
             # write a new line
