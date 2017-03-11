@@ -35,7 +35,7 @@ def load_frames(filename):
         # read first line in file
         line = manvidfile.readline()
         # get meta data from the file (first line in the file, seperated by ','
-        filetype, frameWidthStr, frameHeightStr, framerateStr = line.split(',')
+        filetype, frameWidthStr, frameHeightStr, framerateStr, frameDepthStr = line.split(',')
     except ValueError:
         print 'error reading meta data: ' + filename
         sys.exit()
@@ -58,9 +58,9 @@ def load_frames(filename):
     # close the file
     manvidfile.close()
 
-    return frames, int(frameWidthStr), int(frameHeightStr), int(framerateStr)
+    return frames, int(frameWidthStr), int(frameHeightStr), int(framerateStr), int(frameDepthStr)
 
-framesBuffer, frameWidth, frameHeight, framerate = load_frames(args.filename)
+framesBuffer, frameWidth, frameHeight, framerate, frameDepth = load_frames(args.filename)
 
 # change framerate if specified
 if args.framerate != None:
