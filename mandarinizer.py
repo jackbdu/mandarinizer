@@ -40,8 +40,8 @@ else:
 
 if args.image:
     # open the file to write
-    print "opening the manimg file..."
-    file = open(args.out+'.manimg', 'w')
+    print "opening the txt file..."
+    file = open(args.out+'.txt', 'w')
 
     # read image file as grayscale
     print "loading the image file..."
@@ -83,10 +83,10 @@ if args.image:
     if args.preview:
         print contentToWrite
 
-    print "saving file..."
+    print "saving txt file..."
     file.write(contentToWrite)
     # close file
-    print "closing file..."
+    print "closing txt file..."
     file.close()
     print "mandarinized!"
     sys.exit()
