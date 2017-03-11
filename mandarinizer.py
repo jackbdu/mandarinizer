@@ -15,7 +15,7 @@ __email__ = "jackbdu@nyu.edu"
 
 # parsing arguments
 parser = argparse.ArgumentParser(description="Mandarinize an image file, a video file or a webcam stream.")
-parser.add_argument('-r', "--reverse", action='store_true', help="toggle the reverse of the frame")
+parser.add_argument('-ivt', "--invert", action='store_true', help="invert the color of the frame")
 parser.add_argument('-p', "--preview", action='store_false', help="toggle preview")
 parser.add_argument('-f', "--flip", action='store_true', help="toggle the vertical flip of the frame")
 parser.add_argument('-s', "--space", action='store_true', help="add a space between every two characters")
