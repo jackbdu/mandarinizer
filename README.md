@@ -39,13 +39,16 @@ Above is a sample output of Mandarinizer [logo](./logo.png)
 ## Usage
 ### mandarinizer.py
 ```
-usage: mandarinizer.py [-h] [-ivt] [-p] [-f] [-s] [-w WIDTH] [-fps FRAMERATE]
-                       [-d {2,4,8,16}] [-v VIDEO] [-i IMAGE] [-o OUT]
+usage: mandarinizer.py [-h] [--version] [-inv] [-p] [-f] [-s] [-w WIDTH]
+                       [-fps FRAMERATE] [-d {2,4,8,16}]
+                       [-c CHARACTER [CHARACTER ...]] [-v VIDEO] [-i IMAGE]
+                       [-o OUT]
 
 Mandarinize an image file, a video file or a webcam stream.
 
 optional arguments:
   -h, --help            show this help message and exit
+  --version             show program's version number and exit
   -inv, --invert        invert the color of the frame
   -p, --preview         toggle preview
   -f, --flip            toggle the vertical flip of the frame
@@ -56,6 +59,8 @@ optional arguments:
                         specify the frames per second
   -d {2,4,8,16}, --depth {2,4,8,16}
                         specify the color depth
+  -c CHARACTER [CHARACTER ...], --character CHARACTER [CHARACTER ...]
+                        specify a list of characters by the order of indensity
   -v VIDEO, --video VIDEO
                         path to the video file
   -i IMAGE, --image IMAGE
