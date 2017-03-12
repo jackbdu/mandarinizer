@@ -121,7 +121,7 @@ try:
 
     # convert frame to grayscale image
     img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    img = cv2.equalizeHist(img)
+
     # get the height and width of the image
     height, width = img.shape
     # calculate the image height based on the image width
@@ -145,8 +145,9 @@ try:
             cap.release()
             sys.exit()
 
-        # convert frame to grayscale image
+        # preparing the frame for mandarinizing
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        img = cv2.equalizeHist(img)
 
         # resize the image
         img = cv2.resize(img,(args.width, image_height), interpolation = cv2.INTER_CUBIC)
