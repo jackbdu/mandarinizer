@@ -45,9 +45,15 @@ If you only want to use player.py, you can skip this part.
 
 However, in order to use mandarinizer.py, you need to have opencv-python installed. To install the package:
 
+### Linux
+
 ```
 pip install opencv-python
 ```
+
+### macOS
+
+Follow the instruction [here](http://www.mobileway.net/2015/02/14/install-opencv-for-python-on-mac-os-x/).
 
 ## Usage
 
