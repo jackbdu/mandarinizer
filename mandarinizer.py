@@ -25,7 +25,7 @@ parser.add_argument('-fps', "--framerate", type=int, default=12, help="specify t
 parser.add_argument('-d', "--depth", type=int, default=16, choices=[2,4,8,16], help="specify the color depth")
 parser.add_argument('-c', "--character", nargs='+', help="specify a list of characters by the order of indensity")
 parser.add_argument('-v', "--video", help="path to the video file")
-parser.add_argument('-i', "--image", help="path to the image file")
+parser.add_argument('-i', "--image", nargs='+', help="paths to the image files")
 parser.add_argument('-o', "--out", default="out", help="path to the ouput file")
 args = parser.parse_args()
 
@@ -42,57 +42,59 @@ else:
         char_list = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"] # 16-bit char list
 
 if args.image:
-    # open the file to write
-    print "opening the txt file..."
-    file = open(args.out+'.txt', 'w')
+    for i in range(len(args.image)):
+        filename = args.out+'_'+str(i+1)+'.txt';
+        # open the file to write
+        print "creating the txt file: " + filename
+        file = open(filename, 'w')
 
-    # read image file as grayscale
-    print "loading the image file..."
-    img = cv2.imread(args.image, cv2.IMREAD_GRAYSCALE)
+        # read image file as grayscale
+        print "loading the image file: " + args.image[i]
+        img = cv2.imread(args.image[i], cv2.IMREAD_GRAYSCALE)
 
-    # get the height and width of the image
-    height, width = img.shape
+        # get the height and width of the image
+        height, width = img.shape
 
-    # resize the image
-    img = cv2.resize(img,(args.width, height*args.width/width), interpolation = cv2.INTER_CUBIC)
+        # resize the image
+        img = cv2.resize(img,(args.width, height*args.width/width), interpolation = cv2.INTER_CUBIC)
 
-    # get the new height and width of the image
-    height, width = img.shape
+        # get the new height and width of the image
+        height, width = img.shape
 
-    # loop through each row of pixels
-    print "mandarinizing..."
+        # loop through each row of pixels
+        print "mandarinizing..."
 
-    contentToWrite = ""
-    for i in range(height):
+        contentToWrite = ""
+        for i in range(height):
 
-        # loop through each pixel in the i-th row
-        for j in range(width):
+            # loop through each pixel in the i-th row
+            for j in range(width):
 
-            # write corresponding chinese characters based on the color of the pixel
-            char_length = len(char_list)
-            for k in range(char_length):
-                if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
-                    if args.invert:
-                        contentToWrite += char_list[char_length-k-1]
-                    else:
-                        contentToWrite += char_list[k]
-                    if args.space:
-                        for l in range(args.space):
-                            contentToWrite += ' '
-                    break
+                # write corresponding chinese characters based on the color of the pixel
+                char_length = len(char_list)
+                for k in range(char_length):
+                    if img[i, j] < 256/char_length*(k+1) and img[i, j] >= 256/char_length*k:
+                        if args.invert:
+                            contentToWrite += char_list[char_length-k-1]
+                        else:
+                            contentToWrite += char_list[k]
+                        if args.space:
+                            for l in range(args.space):
+                                contentToWrite += ' '
+                        break
 
-        # write a new line
-        contentToWrite += "\n"
+            # write a new line
+            contentToWrite += "\n"
 
-    if args.preview:
-        print contentToWrite
+        if args.preview:
+            print contentToWrite
 
-    print "saving txt file..."
-    file.write(contentToWrite)
-    # close file
-    print "closing txt file..."
-    file.close()
-    print "mandarinized!"
+        print "saving txt file: " + filename
+        file.write(contentToWrite)
+        # close file
+        print "closing txt file: " + filename
+        file.close()
+        print "mandarinized!"
     sys.exit()
 
 # turn on webcam when video file is not specified
