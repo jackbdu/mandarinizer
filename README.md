@@ -62,8 +62,8 @@ Follow the instruction [here](http://www.mobileway.net/2015/02/14/install-opencv
 ```
 usage: mandarinizer.py [-h] [--version] [-inv] [-p] [-f] [-s] [-w WIDTH]
                        [-fps FRAMERATE] [-d {2,4,8,16}]
-                       [-c CHARACTER [CHARACTER ...]] [-v VIDEO] [-i IMAGE]
-                       [-o OUT]
+                       [-c CHARACTER [CHARACTER ...]] [-v VIDEO]
+                       [-i IMAGE [IMAGE ...]] [-o OUT]
 
 Mandarinize an image file, a video file or a webcam stream.
 
@@ -84,8 +84,8 @@ optional arguments:
                         specify a list of characters by the order of indensity
   -v VIDEO, --video VIDEO
                         path to the video file
-  -i IMAGE, --image IMAGE
-                        path to the image file
+  -i IMAGE [IMAGE ...], --image IMAGE [IMAGE ...]
+                        paths to the image files
   -o OUT, --out OUT     path to the ouput file
 ```
 
