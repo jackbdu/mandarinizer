@@ -5,7 +5,11 @@
 import sys      # exit
 import time     # sleep
 import argparse # argparse
-import cv2
+try:
+    import cv2
+except ImportError as error:
+    print "ImportError:", error.args[0]
+    sys.exit(1)
 
 __author__ = "Jack B. Du"
 __copyright__ = "Copyright (c) 2017, Jack B. Du"
