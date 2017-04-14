@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mandarinizer</title>
+  </head>
+  <body>
+    <img id="src" src="logo.png" width="32px" height="32px" alt="src" />
+    <ul id="dst">
+    </ul>
+  </body>
+  <style>
+    #dst {
+      list-style: none;
+      letter-spacing: 5px;
+    }
+  </style>
+  <script>
+    charList = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"]
+    charListLength = charList.length;
+    frame = [];
+    window.onload = function() {
+      var img = document.getElementById("src");
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      context.drawImage(img, 0, 0, img.width, img.height);
+      var src = context.getImageData(0, 0, img.width, img.height).data;
+      var srcLength = src.length;
+      for (var i = 0; i < srcLength; i += 4) {
+        var pixel = (src[i] * 306 + src[i + 1] * 601 + src[i + 2] * 117) >> 10;
+        for (var j = 0; j < charListLength; j++) {
+          // from https://jsperf.com/convert-rgba-to-grayscale
+          if (pixel < 256/charListLength*(j+1) && pixel >= 256/charListLength*j) {
+            frame.push(charList[j]);
+          }
+        }
+      }
+      for (var r = 0; r < img.height; r++) {
+        lineOfString = "";
+        for (var c = 0; c < img.width; c++) {
+          lineOfString += frame[r*img.width+c];
+        }
+        var line = document.createElement('li');
+        line.innerHTML = lineOfString;
+        document.getElementById("dst").appendChild(line);
+      }
+    }
+  </script>
+</html>
