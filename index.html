@@ -5,16 +5,20 @@
     <title>Mandarinizer</title>
   </head>
   <body>
-		<input type="file" id="file">
-    <img id="src" style="display:none;" alt="src" />
     <ul id="dst"></ul>
     <video id="myVideo" width="160" height="120"></video>
   </body>
   <style>
+    body {
+      text-align: center;
+    }
     #dst {
       list-style: none;
-      letter-spacing: 5px;
+      line-height: 1em;
       white-space: nowrap;
+    }
+    video {
+      display: none;
     }
   </style>
   <script>
