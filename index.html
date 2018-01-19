@@ -8,6 +8,7 @@
 		<input type="file" id="file">
     <img id="src" style="display:none;" alt="src" />
     <ul id="dst"></ul>
+    <video id="myVideo" width="160" height="120"></video>
   </body>
   <style>
     #dst {
@@ -17,66 +18,61 @@
     }
   </style>
   <script>
-    charList = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"]
-    charListLength = charList.length;
-			
-		// from http://stackoverflow.com/questions/3814231/loading-an-image-to-a-img-from-input-file
-		document.getElementById('file').onchange = function (evt) {
-				var tgt = evt.target || window.event.srcElement,
-						files = tgt.files;
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia({video:true, audio:false}, success, error);
+    } else {
+      console.log("Your broswer doesn't support!");
+    }
 
-				// FileReader support
-				if (FileReader && files && files.length) {
-						var fr = new FileReader();
-						fr.onload = function () {
-								var dst = document.getElementById("dst");
-								while (dst.hasChildNodes()) {
-										dst.removeChild(dst.lastChild);
-								}
-								document.getElementById("src").src = fr.result;
-                var WIDTH, HEIGHT;
-								document.getElementById("src").onload = function() {
-									frame = [];
-									var img = document.getElementById("src");
-									var canvas = document.createElement("canvas");
-									var context = canvas.getContext('2d');
-                  WIDTH = 64;
-                  HEIGHT = WIDTH*img.naturalHeight/img.naturalWidth;
-									canvas.width = WIDTH;
-									canvas.height = HEIGHT;
-									context.drawImage(img, 0, 0, WIDTH, HEIGHT);
-									var src = context.getImageData(0, 0, WIDTH, HEIGHT).data;
-									var srcLength = src.length;
-									for (var i = 0; i < srcLength; i += 4) {
-										var pixel = (src[i] * 306 + src[i + 1] * 601 + src[i + 2] * 117) >> 10;
-										for (var j = 0; j < charListLength; j++) {
-											// from https://jsperf.com/convert-rgba-to-grayscale
-											if (pixel < 256/charListLength*(j+1) && pixel >= 256/charListLength*j) {
-												frame.push(charList[j]);
-											}
-										}
-									}
-									for (var r = 0; r < HEIGHT; r++) {
-										lineOfString = "";
-										for (var c = 0; c < WIDTH; c++) {
-											lineOfString += frame[r*WIDTH+c];
-										}
-										var line = document.createElement('li');
-										line.innerHTML = lineOfString;
-										document.getElementById("dst").appendChild(line);
-									}
-								}
-						}
-						fr.readAsDataURL(files[0]);
-				}
 
-				// Not supported
-				else {
-						// fallback -- perhaps submit the input to an iframe and temporarily store
-						// them on the server until the user's session ends.
-				}
-		}
+    function success(stream) {
+      video = document.getElementById('myVideo');
+      video.srcObject = stream;
+      video.play();
+      update();
+    }
 
+    function error(e) {
+      console.log("error");
+    }
+
+    var charList = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"]
+    var charListLength = charList.length;
+
+    function update() {
+
+      img = document.getElementById('myVideo');
+      frame = [];
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext('2d');
+      WIDTH = 64;
+      HEIGHT = WIDTH*img.height/img.width;
+      canvas.width = WIDTH;
+      canvas.height = HEIGHT;
+      context.drawImage(img, 0, 0, WIDTH, HEIGHT);
+      var src = context.getImageData(0, 0, WIDTH, HEIGHT).data;
+      var srcLength = src.length;
+      for (var i = 0; i < srcLength; i += 4) {
+        var pixel = (src[i] * 306 + src[i + 1] * 601 + src[i + 2] * 117) >> 10;
+        for (var j = 0; j < charListLength; j++) {
+          // from https://jsperf.com/convert-rgba-to-grayscale
+          if (pixel < 256/charListLength*(j+1) && pixel >= 256/charListLength*j) {
+            frame.push(charList[j]);
+          }
+        }
+      }
+      document.getElementById("dst").innerHTML = "";
+      for (var r = 0; r < HEIGHT; r++) {
+        lineOfString = "";
+        for (var c = 0; c < WIDTH; c++) {
+          lineOfString += frame[r*WIDTH+c];
+        }
+        var line = document.createElement('li');
+        line.innerHTML = lineOfString;
+        document.getElementById("dst").appendChild(line);
+      }
+      setTimeout(function(){ update() }, 30);
+    }
   </script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59972581-2"></script>
