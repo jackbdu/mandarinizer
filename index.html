@@ -1,90 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>Mandarinizer</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59972581-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-59972581-2');
+    </script>
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=https://jackbdu.bitbucket.io/mandarinizer/" />
   </head>
   <body>
-    <ul id="dst"></ul>
-    <video id="myVideo" width="160" height="120"></video>
+    <p>Redirecting to <a href="https://jackbdu.bitbucket.io/mandarinizer/">https://jackbdu.bitbucket.io/mandarinizer/</a>...</p>
   </body>
-  <style>
-    body {
-      text-align: center;
-    }
-    #dst {
-      list-style: none;
-      line-height: 1em;
-      white-space: nowrap;
-    }
-    video {
-      display: none;
-    }
-  </style>
-  <script>
-    if (navigator.getUserMedia) {
-      navigator.getUserMedia({video:true, audio:false}, success, error);
-    } else {
-      console.log("Your broswer doesn't support!");
-    }
-
-
-    function success(stream) {
-      video = document.getElementById('myVideo');
-      video.srcObject = stream;
-      video.play();
-      update();
-    }
-
-    function error(e) {
-      console.log("error");
-    }
-
-    var charList = ["龘","驫","羴","掱","蟲","淼","品","壵","尛","太","大","木","乂","人","丿","丶"]
-    var charListLength = charList.length;
-
-    function update() {
-
-      img = document.getElementById('myVideo');
-      frame = [];
-      var canvas = document.createElement("canvas");
-      var context = canvas.getContext('2d');
-      WIDTH = 64;
-      HEIGHT = WIDTH*img.height/img.width;
-      canvas.width = WIDTH;
-      canvas.height = HEIGHT;
-      context.drawImage(img, 0, 0, WIDTH, HEIGHT);
-      var src = context.getImageData(0, 0, WIDTH, HEIGHT).data;
-      var srcLength = src.length;
-      for (var i = 0; i < srcLength; i += 4) {
-        var pixel = (src[i] * 306 + src[i + 1] * 601 + src[i + 2] * 117) >> 10;
-        for (var j = 0; j < charListLength; j++) {
-          // from https://jsperf.com/convert-rgba-to-grayscale
-          if (pixel < 256/charListLength*(j+1) && pixel >= 256/charListLength*j) {
-            frame.push(charList[j]);
-          }
-        }
-      }
-      document.getElementById("dst").innerHTML = "";
-      for (var r = 0; r < HEIGHT; r++) {
-        lineOfString = "";
-        for (var c = 0; c < WIDTH; c++) {
-          lineOfString += frame[r*WIDTH+c];
-        }
-        var line = document.createElement('li');
-        line.innerHTML = lineOfString;
-        document.getElementById("dst").appendChild(line);
-      }
-      setTimeout(function(){ update() }, 30);
-    }
-  </script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59972581-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-59972581-2');
-</script>
 </html>
