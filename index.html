@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59972581-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-59972581-2');
-    </script>
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0; url=https://jackbdu.bitbucket.io/mandarinizer/" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="author" content="Jack B. Du">
+    <meta name="description" content="A camera with Chinese characteristics">
+    <title>Mandarinizer - Camera</title>
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-    <p>Redirecting to <a href="https://jackbdu.bitbucket.io/mandarinizer/">https://jackbdu.bitbucket.io/mandarinizer/</a>...</p>
+  <body onresize="onResize();">
+    <video id="myVideo"></video>
+    <canvas id="myCanvas"></canvas>
+    <div id="viewfinder"></div>
+    <div id="credits">
+      <p>jackbdu.com/mandarinizer</p>
+    </div>
+    <button id="toolbarButton" onclick="toggleToolbar();"></button>
+    <button id="editButton" onclick="toggleEdit();"></button>
+    <button id="infoButton" onclick="toggleInfo();"></button>
+    <button id="copyButton" data-clipboard-target="#viewfinder"></button>
+    <div id="toolbar">
+      <input id="zoomSlider" type="range" min="0" max="456" value="0"></input>
+      <button id="themeButton" onclick="switchTheme();"></button>
+      <button id="resButton" onclick="changeRes();"></button>
+      <button id="shutterButton" onclick="takePicture();"></button>
+      <button id="mirrorButton" onclick="toggleMirror();"></button>
+      <button id="cameraButton" onclick="switchCamera();"></button>
+    </div>
+    <div id="infoBox">
+      <p style="text-align: left;"><strong>iPhone</strong>/<strong>iPad</strong>: Please update to the latest iOS and open this page with Safari.</p>
+      <p style="text-align: left;"><strong>Android</strong>: Please open this page with Chrome.</p>
+      <p style="text-align: left;"><strong>Desktop</strong>: Please open this page with Chrome, Firefox, or Safari. </p>
+    </div>
   </body>
+  <style></style>
+  <script src="js/clipboard.min.js"></script>
+  <script src="js/DetectRTC.min.js"></script>
+  <script src="js/html2canvas.min.js"></script>
+  <script src="js/convert.js"></script>
+  <script src="js/script.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59972581-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-59972581-2');
+  </script>
 </html>
