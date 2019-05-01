@@ -3,14 +3,18 @@ var res   = findGetParameter("res");         // number of characters of the shor
 var scl   = findGetParameter("scl");
 var clr   = findGetParameter("clr");
 var wm    = findGetParameter("wm");
+var rt    = findGetParameter("rt"); // ratio
+var zm    = findGetParameter("zm"); // zoom
+var mr    = findGetParameter("mr"); // mirror
+var iv    = findGetParameter("iv"); // invert
 chars = chars ? _half2full(chars, {punctuation: true, smart_mode: false}) : "龘驫羴掱蟲淼品壵尛太大木乂人丿丶";
 res   = res ? res : 48;
 scl   = scl ? scl : 2;
 clr   = clr ? clr : 0;
 wm    = wm ? wm : 0;
 var videoHeight = res;// by default, landscape, shorter side is height
-var ratio = 4/3;      // width - height ratio
-var zoom = 0;         // value indicating zoom
+var ratio = rt ? rt : 4/3;      // width - height ratio
+var zoom = zm ? zm : 0;         // value indicating zoom
 var charValuePairs = [];
 var watermark24 = "富强民主文明和谐自由平等公正法制爱国敬业诚信友善";
 var watermark32 = "富强民主文明和谐    自由平等公正法制    爱国敬业诚信友善";
@@ -27,9 +31,9 @@ var deviceIdx = 0;    // index of deviceId in use
 var infoCount = 0;
 
 var isWatermarked = (wm == 1);
-var isMirrored    = false; // whether or not the stream is mirrored
+var isMirrored    = (mr == 1); // whether or not the stream is mirrored
 var isActivated   = false; // whether or not the toolbar is activated
-var isInverted    = false; // whether or not the stream is inverted
+var isInverted    = (iv == 1); // whether or not the stream is inverted
 var infoIsShown   = false;
 var editIsShown   = false;
 var isTimeless    = false; // whether or not the time is sepcified
@@ -51,7 +55,8 @@ var infoBox       = document.getElementById("infoBox");
 var styleTag      = document.getElementsByTagName('style')[0];
 var context       = canvas.getContext('2d');
 
-body.style.backgroundColor = "#fff";
+body.style.backgroundColor = isInverted ? "#000" : "#fff";
+viewfinder.style.color = isInverted ? "#fff" : "#000";
 
 sortCharsByAlpha(chars);
 
