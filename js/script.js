@@ -541,5 +541,9 @@ function handleReturnKey() {
 }
 
 if (rf == 1) {
-   setInterval(location.reload(), 1800000);
+   setTimeout(refreshPage, 1800000);
+}
+
+function refreshPage() {
+  location.reload();
 }
