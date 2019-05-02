@@ -7,6 +7,7 @@ var rt    = findGetParameter("rt"); // ratio
 var zm    = findGetParameter("zm"); // zoom
 var mr    = findGetParameter("mr"); // mirror
 var iv    = findGetParameter("iv"); // invert
+var rf    = findGetParameter("rf"); // auto refresh
 chars = chars ? _half2full(chars, {punctuation: true, smart_mode: false}) : "龘驫羴掱蟲淼品壵尛太大木乂人丿丶";
 res   = res ? res : 48;
 scl   = scl ? scl : 2;
@@ -537,4 +538,8 @@ function handleReturnKey() {
   if (event.keyCode == 13) {
     document.getElementById("editButton").click();
   }
+}
+
+if (rf == 1) {
+   setInterval(location.reload(), 1800000);
 }
