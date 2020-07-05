@@ -493,7 +493,7 @@ function displayInfo(msg, time=null) {
   editIsShown = false;
   editButton.className.includes("activated") ? editButton.className = "activated" : editButton.className = "";
   infoBox.innerHTML = msg;
-  infoBox.style.opacity = 0.9;
+  infoBox.style.opacity = 1;
   infoBox.style.zIndex = "200";
   if (time!=null) {
     isTimeless = false;

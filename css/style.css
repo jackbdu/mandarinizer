@@ -77,7 +77,7 @@ html, body {
   white-space: nowrap;
 }
 #toolbar.activated {
-  opacity: 0.9;
+  opacity: 1;
   z-index: 100;
 }
 #toolbar.landscape {
@@ -92,7 +92,7 @@ button {
 }
 #zoomSlider {
   -webkit-appearance: none;
-  background: #f0f0f0;
+  background: #f0f0f0e6;
   outline: none;
   border-radius: 2em;
   width: 90%;
@@ -109,12 +109,12 @@ button {
   background: #000;
   cursor: pointer;
   border-radius: 2em;
-  border: 1px solid white;
+  border: 1px solid #f0f0f0;
 }
 #zoomSlider::-moz-range-thumb {
   width: 3em;
   height: 3em;
-  background: #f0f0f0;
+  background: #f0f0f0e6;
   cursor: pointer;
   border-radius: 2em;
 }
@@ -125,7 +125,7 @@ button {
   width: 1em;
   height: 1em;
   cursor: pointer;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0e6;
   border-radius: 0.2em;
   background-size: 80%;
   background-position: center;
@@ -142,7 +142,7 @@ button {
   opacity: 0;
 }
 #copyButton.activated, #infoButton.activated, #editButton.activated {
-  opacity: 0.9;
+  opacity: 1;
   z-index: 101;
 }
 #copyButton {
@@ -163,6 +163,9 @@ button {
 #themeButton {
   background-image: url("../assets/theme.png");
 }
+#shutterButton {
+  background-image: url("../assets/shutter.png");
+}
 #cameraButton {
   background-image: url("../assets/camera.png");
 }
@@ -173,7 +176,7 @@ button {
   border-radius: 5em;
 }
 #infoBox {
-  background-color: rgba(240, 240, 240, 221);
+  background-color: #f0f0f0e6;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -184,7 +187,7 @@ button {
   font-size: 1em;
   overflow-y: auto;
   border-radius: 1em;
-  border: 1em rgba(240, 240, 240, 221) solid;
+  border: 1em solid #f0f0f000;
   z-index: 49;
   transition: opacity 0.5s ease;
 }
@@ -198,7 +201,7 @@ button {
   border: none;
   border-radius: 0.5em;
   font-size: 1.5em;
-  background-color: #ddd;
+  background-color: #0000001a;
 }
 input::placeholder {
   color: #999;
