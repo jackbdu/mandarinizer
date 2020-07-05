@@ -289,12 +289,33 @@ navigator.mediaDevices.enumerateDevices()
     // start up the stream
     navigator.mediaDevices.getUserMedia(constraints)
     .then(function success(stream) {
-      myVideo.setAttribute('autoplay', '');
-      myVideo.setAttribute('muted', '');
-      myVideo.setAttribute('playsinline', '');
-      myVideo.srcObject = stream;
-      hideInfo();
-      update();
+      // this is after permission is granted, update the device ids
+      navigator.mediaDevices.enumerateDevices()
+      .then(function(devices) {
+        deviceIds = [];
+        devices.forEach(function(device) {
+          // saves videoinput deviceId in the array
+          if (device.kind == "videoinput") {
+            deviceIds.push(device.deviceId);
+          }
+        });
+        var constraints = {
+          audio: false,
+          video: {
+            deviceId: {exact: deviceIds[deviceIdx]},
+            aspectRatio: ratio
+          }
+        };
+        myVideo.setAttribute('autoplay', '');
+        myVideo.setAttribute('muted', '');
+        myVideo.setAttribute('playsinline', '');
+        myVideo.srcObject = stream;
+        hideInfo();
+        update();
+      })
+      .catch(function(err) {
+        displayInfo(err.name);
+      });
     })
     .catch(function(err) {
       displayInfo("Please refresh the page and allow access to the camera in order to use Mandarinizer");
