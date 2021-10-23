@@ -1,6 +1,8 @@
 # Mandarinizer
 
-A Python program that converts image files, video files or live webcam stream to ASCII-art-inspired Chinese character art.
+A Python program that converts image files, video files or live webcam stream to pixel art consisting of Chinese characters.
+
+*A web version can be found on [this branch](https://github.com/jackbdu/mandarinizer/tree/gh-pages).*
 
 ```
 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 龘 
