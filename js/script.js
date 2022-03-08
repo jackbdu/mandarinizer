@@ -4,14 +4,17 @@ var scl   = findGetParameter("scl");
 var clr   = findGetParameter("clr");
 var wm    = findGetParameter("wm");
 var rt    = findGetParameter("rt"); // ratio
+var pc    = findGetParameter("pc"); // percentage
 var zm    = findGetParameter("zm"); // zoom
 var mr    = findGetParameter("mr"); // mirror
 var iv    = findGetParameter("iv"); // invert
 var rf    = findGetParameter("rf"); // auto refresh
+var rft   = findGetParameter("rft"); // auto refresh time
 chars = chars ? _half2full(chars, {punctuation: true, smart_mode: false}) : "龘驫羴掱蟲淼品壵尛太大木乂人丿丶";
 res   = res ? res : 48;
 scl   = scl ? scl : 2;
 clr   = clr ? clr : 0;
+pc    = pc ? pc : 90;
 wm    = wm ? wm : 0;
 var videoHeight = res;// by default, landscape, shorter side is height
 var ratio = rt ? rt : 4/3;      // width - height ratio
@@ -405,10 +408,10 @@ function onResize() {
   var theUnit;
   if (innerWidth > innerHeight * ratio) {
     if (ratio > 1) {
-      thePercentage = 90;
+      thePercentage = pc;
       theUnit = "vh";
     } else {
-      thePercentage = 90/ratio;
+      thePercentage = pc/ratio;
       theUnit = "vh";
     }
     toolbar.className.includes("activated") ? toolbar.className = "activated landscape" : toolbar.className = "landscape";
@@ -430,10 +433,10 @@ function onResize() {
     copyButton.style.left = "0.2em";
   } else {
     if (ratio > 1) {
-      thePercentage = 90/ratio;
+      thePercentage = pc/ratio;
       theUnit = "vw";
     } else {
-      thePercentage = 90;
+      thePercentage = pc;
       theUnit = "vw";
     }
     toolbar.className.includes("activated") ? toolbar.className = "activated" : toolbar.className = "";
@@ -562,7 +565,7 @@ function handleReturnKey() {
 }
 
 if (rf == 1) {
-   setTimeout(refreshPage, 1800000);
+  setTimeout(refreshPage, rft ? rft : 1800000);
 }
 
 function refreshPage() {
