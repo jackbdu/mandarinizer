@@ -329,8 +329,6 @@ navigator.mediaDevices.enumerateDevices()
         var deviceLabel = devicesArray[deviceIdx].label.toLowerCase();
         if (deviceLabel.includes('front') || deviceLabel.includes('facetime')) {
           isMirrored = true;
-        } else {
-          isMirrored = false;
         }
 
         update();
