@@ -566,6 +566,8 @@ function handleReturnKey() {
 
 if (rf == 1) {
   setTimeout(refreshPage, rft ? rft : 1800000);
+} else { // display toolbar when not rf is off (not in exhibt mode)
+  toggleToolbar();
 }
 
 function refreshPage() {
