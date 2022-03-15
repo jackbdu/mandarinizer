@@ -298,7 +298,7 @@ navigator.mediaDevices.enumerateDevices()
         deviceId: {exact: devicesArray[deviceIdx].deviceId}
       }
     };
-    if (rf === 1) {
+    if (rf == 1) {
       constraints = {
         audio: false,
         video: {
@@ -329,7 +329,7 @@ navigator.mediaDevices.enumerateDevices()
             deviceId: {exact: devicesArray[deviceIdx].deviceId}
           }
         };
-        if (rf === 1) {
+        if (rf == 1) {
           constraints = {
             audio: false,
             video: {
