@@ -288,6 +288,9 @@ navigator.mediaDevices.enumerateDevices()
   });
   // if videoinput device found
   if (devicesArray.length > 0) {
+    if (deviceIdx >= devicesArray.length) {
+      deviceIdx = devicesArray.length-1;
+    }
     // set up the constraints to use the deviceIdx
     var constraints = {
       audio: false,
@@ -308,8 +311,8 @@ navigator.mediaDevices.enumerateDevices()
             devicesArray.push(device);
           }
         });
-        if (deviceId >= devicesArray.length) {
-          deviceId = 0;
+        if (deviceIdx >= devicesArray.length) {
+          deviceIdx = devicesArray.length-1;
         }
         var constraints = {
           audio: false,
