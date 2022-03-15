@@ -1,6 +1,6 @@
 var chars = findGetParameter("chars");
 var res   = findGetParameter("res");         // number of characters of the shorter side
-var scl   = findGetParameter("scl");
+var scl   = findGetParameter("scl");         // scl for exported image
 var clr   = findGetParameter("clr");
 var wm    = findGetParameter("wm");
 var rt    = findGetParameter("rt"); // ratio
