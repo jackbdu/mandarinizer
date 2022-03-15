@@ -249,7 +249,7 @@ function switchCamera() {
     var constraints = {
       audio: false,
       video: {
-        deviceId: {exact: devicesArray[deviceIdx].deviceId},
+        deviceId: {exact: devicesArray[deviceIdx].deviceId}
       }
     };
     navigator.mediaDevices.getUserMedia(constraints)
@@ -298,6 +298,15 @@ navigator.mediaDevices.enumerateDevices()
         deviceId: {exact: devicesArray[deviceIdx].deviceId}
       }
     };
+    if (rf === 1) {
+      constraints = {
+        audio: false,
+        video: {
+          deviceId: {exact: devicesArray[deviceIdx].deviceId},
+          aspectRatio: ratio
+        }
+      };
+    }
     // start up the stream
     navigator.mediaDevices.getUserMedia(constraints)
     .then(function success(stream) {
@@ -320,6 +329,15 @@ navigator.mediaDevices.enumerateDevices()
             deviceId: {exact: devicesArray[deviceIdx].deviceId}
           }
         };
+        if (rf === 1) {
+          constraints = {
+            audio: false,
+            video: {
+              deviceId: {exact: devicesArray[deviceIdx].deviceId},
+              aspectRatio: ratio
+            }
+          };
+        }
         myVideo.setAttribute('autoplay', '');
         myVideo.setAttribute('muted', '');
         myVideo.setAttribute('playsinline', '');
