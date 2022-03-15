@@ -256,7 +256,7 @@ function switchCamera() {
         track.stop();
       });
       var deviceLabel = devicesArray[deviceIdx].label.toLowerCase();
-      if (deviceLabel.includes('front') || deviceLabel.includes('FaceTime')) {
+      if (deviceLabel.includes('front') || deviceLabel.includes('facetime')) {
         isMirrored = true;
       } else {
         isMirrored = false;
@@ -317,6 +317,14 @@ navigator.mediaDevices.enumerateDevices()
         myVideo.setAttribute('playsinline', '');
         myVideo.srcObject = stream;
         hideInfo();
+
+        var deviceLabel = devicesArray[deviceIdx].label.toLowerCase();
+        if (deviceLabel.includes('front') || deviceLabel.includes('facetime')) {
+          isMirrored = true;
+        } else {
+          isMirrored = false;
+        }
+
         update();
       })
       .catch(function(err) {
