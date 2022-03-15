@@ -30,7 +30,7 @@ var watermark = watermark24;  // watermark in use
 var infoInfo = "<p style='text-align: left;'>Mandarinizer, developed by <a target='_blank' href='http://jackbdu.com/about'>Jack B. Du</a>, is a camera with Chinese characteristics.</p><br><p style='text-align: left;'>Take pictures by taking screenshots and record videos by recording screen.</p>";
 var editInfo = "<input id='chars' type='text' placeholder='Enter characters here...' onkeyup='handleReturnKey();'></input>"
 
-var deviceIds = [];   // array of deviceId
+var devicesArray = [];   // array of devices
 var deviceIdx = 0;    // index of deviceId in use
 var infoCount = 0;
 
@@ -211,11 +211,11 @@ function takePicture() {
     // update the device ids, because somehow device ids are altered after html2canvas
     navigator.mediaDevices.enumerateDevices()
     .then(function(devices) {
-      deviceIds = [];
+      devicesArray = [];   // array of devices
       devices.forEach(function(device) {
         // saves videoinput deviceId in the array
         if (device.kind == "videoinput") {
-          deviceIds.push(device.deviceId);
+          devicesArray.push(device);
         }
       });
     })
@@ -242,11 +242,12 @@ function toggleMirror() {
 }
 
 function switchCamera() {
-  if (deviceIds.length > 1) {
+  if (devicesArray.length > 1) {
+    deviceIdx = (deviceIdx+1<devicesArray.length)? deviceIdx + 1 : 0;
     var constraints = {
       audio: false,
       video: {
-        deviceId: {exact: deviceIds[((deviceIdx+1<deviceIds.length)? ++deviceIdx : deviceIdx=0)]},
+        deviceId: {exact: devicesArray[deviceIdx].deviceId},
       }
     };
     navigator.mediaDevices.getUserMedia(constraints)
@@ -254,7 +255,12 @@ function switchCamera() {
       myVideo.srcObject.getTracks().forEach(function(track) {
         track.stop();
       });
-      isMirrored = false;
+      var deviceLabel = devicesArray[deviceIdx].label.toLowerCase();
+      if (deviceLabel.includes('front') || deviceLabel.includes('FaceTime')) {
+        isMirrored = true;
+      } else {
+        isMirrored = false;
+      }
 
       myVideo.srcObject = stream;
       displayInfo("Camera switched", 1500);
@@ -275,16 +281,16 @@ navigator.mediaDevices.enumerateDevices()
   devices.forEach(function(device) {
     // saves videoinput deviceId in the array
     if (device.kind == "videoinput") {
-      deviceIds.push(device.deviceId);
+      devicesArray.push(device);
     }
   });
   // if videoinput device found
-  if (deviceIds.length > 0) {
+  if (devicesArray.length > 0) {
     // set up the constraints to use the deviceIdx
     var constraints = {
       audio: false,
       video: {
-        deviceId: {exact: deviceIds[deviceIdx]}
+        deviceId: {exact: devicesArray[deviceIdx].deviceId}
       }
     };
     // start up the stream
@@ -293,17 +299,17 @@ navigator.mediaDevices.enumerateDevices()
       // this is after permission is granted, update the device ids
       navigator.mediaDevices.enumerateDevices()
       .then(function(devices) {
-        deviceIds = [];
+        devicesArray = [];   // array of devices
         devices.forEach(function(device) {
           // saves videoinput deviceId in the array
           if (device.kind == "videoinput") {
-            deviceIds.push(device.deviceId);
+            devicesArray.push(device);
           }
         });
         var constraints = {
           audio: false,
           video: {
-            deviceId: {exact: deviceIds[deviceIdx]}
+            deviceId: {exact: devicesArray[deviceIdx].deviceId}
           }
         };
         myVideo.setAttribute('autoplay', '');
