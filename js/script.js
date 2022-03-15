@@ -247,7 +247,6 @@ function switchCamera() {
       audio: false,
       video: {
         deviceId: {exact: deviceIds[((deviceIdx+1<deviceIds.length)? ++deviceIdx : deviceIdx=0)]},
-        aspectRatio: ratio
       }
     };
     navigator.mediaDevices.getUserMedia(constraints)
