@@ -285,8 +285,7 @@ navigator.mediaDevices.enumerateDevices()
     var constraints = {
       audio: false,
       video: {
-        deviceId: {exact: deviceIds[deviceIdx]},
-        aspectRatio: ratio
+        deviceId: {exact: deviceIds[deviceIdx]}
       }
     };
     // start up the stream
@@ -305,8 +304,7 @@ navigator.mediaDevices.enumerateDevices()
         var constraints = {
           audio: false,
           video: {
-            deviceId: {exact: deviceIds[deviceIdx]},
-            aspectRatio: ratio
+            deviceId: {exact: deviceIds[deviceIdx]}
           }
         };
         myVideo.setAttribute('autoplay', '');
