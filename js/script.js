@@ -10,10 +10,12 @@ var mr    = findGetParameter("mr"); // mirror
 var iv    = findGetParameter("iv"); // invert
 var rf    = findGetParameter("rf"); // auto refresh
 var rft   = findGetParameter("rft"); // auto refresh time
+var dev   = findGetParameter("dev"); // device id
 chars = chars ? _half2full(chars, {punctuation: true, smart_mode: false}) : "藝聯節酋酋联設迪迪阿阿術拜拜设艺計术节计ＳＫＫＡＩ";
 res   = res ? res : 48;
 scl   = scl ? scl : 2;
 clr   = clr ? clr : 0;
+dev   = dev ? dev : 0;
 pc    = pc ? pc : 90;
 wm    = wm ? wm : 0;
 var videoHeight = res;// by default, landscape, shorter side is height
@@ -31,7 +33,7 @@ var infoInfo = "<p style='text-align: left;'>Mandarinizer, developed by <a targe
 var editInfo = "<input id='chars' type='text' placeholder='Enter characters here...' onkeyup='handleReturnKey();'></input>"
 
 var devicesArray = [];   // array of devices
-var deviceIdx = 0;    // index of deviceId in use
+var deviceIdx = dev;    // index of deviceId in use
 var infoCount = 0;
 
 var isWatermarked = (wm == 1);
@@ -306,6 +308,9 @@ navigator.mediaDevices.enumerateDevices()
             devicesArray.push(device);
           }
         });
+        if (deviceId >= devicesArray.length) {
+          deviceId = 0;
+        }
         var constraints = {
           audio: false,
           video: {
