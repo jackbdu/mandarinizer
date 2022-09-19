@@ -11,7 +11,7 @@ html, body {
   text-align: center;
   width: 100%;
   height: 100%;
-  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace, sans-serif;
 }
 #myVideo {
   position: fixed;
