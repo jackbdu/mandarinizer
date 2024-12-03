@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="author" content="Jack B. Du">
-    <meta name="description" content="A camera with Chinese characteristics">
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="author" content="Jack B. Du" />
+    <meta name="description" content="A camera with Chinese characteristics" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body onresize="onResize();">
     <video id="myVideo"></video>
@@ -19,7 +19,7 @@
     <button id="infoButton" onclick="toggleInfo();"></button>
     <button id="copyButton" data-clipboard-target="#viewfinder"></button>
     <div id="toolbar">
-      <input id="zoomSlider" type="range" min="0" max="456" value="0"></input>
+      <input id="zoomSlider" type="range" min="0" max="456" value="0" />
       <button id="themeButton" onclick="switchTheme();"></button>
       <button id="resButton" onclick="changeRes();"></button>
       <button id="shutterButton" onclick="takePicture();"></button>
@@ -27,9 +27,9 @@
       <button id="cameraButton" onclick="switchCamera();"></button>
     </div>
     <div id="infoBox">
-      <p style="text-align: left;"><strong>iPhone</strong>/<strong>iPad</strong>: Please update to the latest iOS and open this page with Safari.</p>
-      <p style="text-align: left;"><strong>Android</strong>: Please open this page with Chrome.</p>
-      <p style="text-align: left;"><strong>Desktop</strong>: Please open this page with Chrome, Firefox, or Safari. </p>
+      <p style="text-align: left"><strong>iPhone</strong>/<strong>iPad</strong>: Please update to the latest iOS and open this page with Safari.</p>
+      <p style="text-align: left"><strong>Android</strong>: Please open this page with Chrome.</p>
+      <p style="text-align: left"><strong>Desktop</strong>: Please open this page with Chrome, Firefox, or Safari.</p>
     </div>
   </body>
   <style></style>
@@ -40,11 +40,4 @@
   <script src="js/script.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-59972581-2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-59972581-2');
-  </script>
 </html>
