@@ -29,7 +29,7 @@ var watermark64 = "富强  民主  文明  和谐           自由  平等  公�
 var watermark96 = "富 强    民 主    文 明    和 谐            自 由    平 等    公 正    法 制            爱 国    敬 业    诚 信    友 善";
 var watermark128 = "富  强      民  主      文  明      和  谐             自  由      平  等      公  正      法  制             爱  国      敬  业      诚  信      友  善";
 var watermark = watermark24; // watermark in use
-var infoInfo = "<p style='text-align: left;'>Mandarinizer, developed by <a target='_blank' href='http://jackbdu.com/about'>Jack B. Du</a>, is a camera with Chinese characteristics.</p><br><p style='text-align: left;'>Take pictures by taking screenshots and record videos by recording screen.</p>";
+var infoInfo = "<p style='text-align: left;'>Mandarinizer, developed by <a target='_blank' href='http://jackbdu.com/about'>Jack B. Du</a>, is an experimental camera with Chinese characteristics.</p>";
 var editInfo = "<input id='chars' type='text' placeholder='Enter characters here...' onkeyup='handleReturnKey();'></input>";
 
 var devicesArray = []; // array of devices
@@ -209,7 +209,9 @@ function takePicture() {
     y: (innerHeight - picHeight) / 2 - 4 * multiple,
   }).then(function (canvas) {
     infoBox.innerHTML = "";
-    displayInfo("<img style='width: 100%; border-radius: 0.5em;' src='" + canvas.toDataURL("image/png") + "' />");
+    var imageData = canvas.toDataURL("image/png");
+    displayInfo("<img style='width: 100%; border-radius: 0.5em;' src='" + imageData + "' />");
+    downloadFile("mandarinizedPhoto.png", imageData);
 
     // update the device ids, because somehow device ids are altered after html2canvas
     navigator.mediaDevices
@@ -227,6 +229,16 @@ function takePicture() {
         displayInfo(err.name);
       });
   });
+}
+
+// https://www.delftstack.com/howto/javascript/javascript-download/
+function downloadFile(filename, imageData) {
+  var element = document.createElement("a");
+  element.setAttribute("href", imageData);
+  element.setAttribute("download", filename);
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
 }
 
 function oncloneFunction(doc) {
