@@ -211,7 +211,7 @@ function takePicture() {
     infoBox.innerHTML = "";
     var imageData = canvas.toDataURL("image/png");
     displayInfo("<img style='width: 100%; border-radius: 0.5em;' src='" + imageData + "' />");
-    downloadFile("mandarinizedPhoto.png", imageData);
+    downloadFile("mandarinized-photo.png", imageData);
 
     // update the device ids, because somehow device ids are altered after html2canvas
     navigator.mediaDevices
